@@ -149,13 +149,7 @@ describe('Rock Dodger', () => {
       }
     })
 
-    it('removes the "keydown" event listener', () => {
-      const spy = expect.spyOn(window, 'removeEventListener')
 
-      endGame()
-
-      expect(spy).toHaveBeenCalledWith('keydown', moveDodger)
-    })
   })
 
   describe('moveDodger(e)', () => {
@@ -167,7 +161,6 @@ describe('Rock Dodger', () => {
       it('does nothing', () => {
         const e = {
           preventDefault: expect.createSpy(),
-          stopPropagation: expect.createSpy(),
           which: 1
         }
         const l = expect.spyOn(window, 'moveDodgerLeft')
@@ -176,7 +169,7 @@ describe('Rock Dodger', () => {
         moveDodger(e)
 
         expect(e.preventDefault).toNotHaveBeenCalled()
-        expect(e.stopPropagation).toNotHaveBeenCalled()
+
         expect(l).toNotHaveBeenCalled()
         expect(r).toNotHaveBeenCalled()
 
@@ -192,7 +185,6 @@ describe('Rock Dodger', () => {
         spy = expect.createSpy()
         e = {
           preventDefault: () => {},
-          stopPropagation: () => {},
           which: 37
         }
       })
@@ -205,13 +197,7 @@ describe('Rock Dodger', () => {
         expect(spy).toHaveBeenCalled()
       })
 
-      it('calls e.stopPropagation()', () => {
-        e.stopPropagation = spy
 
-        moveDodger(e)
-
-        expect(spy).toHaveBeenCalled()
-      })
 
       it('calls moveDodgerLeft()', () => {
         const f = expect.spyOn(window, 'moveDodgerLeft')
@@ -231,7 +217,6 @@ describe('Rock Dodger', () => {
         spy = expect.createSpy()
         e = {
           preventDefault: () => {},
-          stopPropagation: () => {},
           which: 39
         }
       })
@@ -244,13 +229,7 @@ describe('Rock Dodger', () => {
         expect(spy).toHaveBeenCalled()
       })
 
-      it('calls e.stopPropagation()', () => {
-        e.stopPropagation = spy
 
-        moveDodger(e)
-
-        expect(spy).toHaveBeenCalled
-      })
 
       it('calls moveDodgerRight()', () => {
         const f = expect.spyOn(window, 'moveDodgerRight')
